@@ -4,9 +4,19 @@ module ApplicationLoader
   def load_app!
     init_config
     require_app
+    init_settings
+    init_consumer
   end
 
   private
+
+  def init_consumer
+    require_file 'config/initializers/consumer'
+  end
+
+  def init_settings
+    require_file 'config/initializers/config'
+  end
 
   def init_config
     require_file 'config/application'

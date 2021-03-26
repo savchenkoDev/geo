@@ -1,0 +1,2 @@
+rabbit_mq:
+  consumer_pool: 10
