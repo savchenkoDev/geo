@@ -20,6 +20,12 @@ gem 'byebug'
 gem 'activesupport', '~> 6.0.0', require: false
 gem 'fast_jsonapi', '~> 1.5'
 
+gem 'faraday'
+gem 'faraday_middleware'
+
+gem 'activesupport', '~> 6.0.0', require: false
+gem 'fast_jsonapi', '~> 1.5'
+
 group :test do
   gem 'rspec', '~> 3.9.0'
   gem 'factory_bot', '~> 5.2.0'

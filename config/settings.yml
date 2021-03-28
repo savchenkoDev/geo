@@ -1,2 +1,4 @@
 rabbit_mq:
   consumer_pool: 10
+ads_service:
+  url: http://localhost:9290/ads
