@@ -1,2 +1,7 @@
+app:
+  name: geo
 rabbit_mq:
   consumer_pool: 10
+logger:
+  path: log/app.log
+  level: info

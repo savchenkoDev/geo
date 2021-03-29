@@ -22,6 +22,7 @@ gem 'fast_jsonapi', '~> 1.5'
 
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'ougai'
 
 gem 'activesupport', '~> 6.0.0', require: false
 gem 'fast_jsonapi', '~> 1.5'

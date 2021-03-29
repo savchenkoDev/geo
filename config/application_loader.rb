@@ -5,17 +5,13 @@ module ApplicationLoader
     init_config
     require_app
     init_settings
-    init_consumer
   end
 
   private
 
-  def init_consumer
-    require_file 'config/initializers/consumer'
-  end
-
   def init_settings
     require_file 'config/initializers/config'
+    require_dir 'config/initializers'
   end
 
   def init_config
