@@ -7,10 +7,11 @@ queue.subscribe(manual_ack: true) do |delivery_info, properties, payload|
 
   coordinates = GeocoderService.geocode(payload['city'])
 
-  byebug
-
   Application.logger.info(
     'geocoded coordinates',
+    headers: {
+      request_id: Thread.current[:request_id]
+    },
     city: payload['city'],
     coordinates: coordinates
   )
