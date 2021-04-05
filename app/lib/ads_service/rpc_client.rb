@@ -18,10 +18,9 @@ module AdsService
 
     def start
       @reply_queue.subscribe do |delivery_info, properties, payload|
-        return unless properties[:correlation_id] == @correlation_id
+        return unless Thread.current[:request_id] == properties.headers['request_id']
 
         @lock.synchronize {@condition.signal}
-        puts payload
       end
 
       self
@@ -48,8 +47,10 @@ module AdsService
         @queue.publish(
           payload,
           opts.merge(
-            app_id: 'geocoder',
-            correlation_id: @correlation_id,
+            app_id: Settings.app.name,
+            headers: {
+              request_id: Thread.current[:request_id]
+            },
             reply_to: @reply_queue.name
           )
         )

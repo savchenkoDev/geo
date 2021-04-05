@@ -7,6 +7,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    amazing_print (1.3.0)
     amq-protocol (2.3.2)
     bunny (2.17.0)
       amq-protocol (~> 2.3, >= 2.3.1)
@@ -71,6 +72,9 @@ GEM
       concurrent-ruby (~> 1.0)
     minitest (5.14.4)
     multipart-post (2.1.1)
+    oj (3.11.3)
+    ougai (2.0.0)
+      oj (~> 3.10)
     rake (13.0.3)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
@@ -97,6 +101,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 6.0.0)
+  amazing_print
   bunny
   byebug
   config
@@ -108,6 +113,7 @@ DEPENDENCIES
   fast_jsonapi (~> 1.5)
   geocoder
   i18n
+  ougai
   rake
   rspec (~> 3.9.0)
 
