@@ -1,9 +1,9 @@
+logdev = Application.environment == :production ? STDOUT : Application.root.concat('/', Settings.logger.path)
+
 logger = Ougai::Logger.new(
-  Application.root.concat('/', Settings.logger.path),
+  logdev,
   level: Settings.logger.level
 )
-
-logger.formatter = Ougai::Formatters::Readable.new if Application.environment == :development
 
 logger.before_log = lambda do |data|
   data[:service] = {name: Settings.app.name}

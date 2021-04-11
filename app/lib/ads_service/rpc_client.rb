@@ -1,4 +1,5 @@
 require_relative 'rpc_api'
+require_relative '../rabbitmq'
 
 module AdsService
   class RpcClient
