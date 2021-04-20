@@ -7,4 +7,8 @@ Metrics.configure do |registry|
     docstring: 'The total number of geocoding requests',
     labels: %i[result]
   )
+  registry.histogram(
+    :geocoding_rate,
+    docstring: 'Rate of ad geocoding'
+  )
 end
