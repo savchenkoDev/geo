@@ -17,8 +17,11 @@ queue.subscribe(manual_ack: true) do |delivery_info, properties, payload|
   )
 
   if coordinates.present?
+    Metrics.geocoding_requests_counter.increment(labels: {result: 'success'})
     client = AdsService::Client.new
     client.update_coordinates(payload['id'], coordinates)
+  else
+    Metrics.geocoding_requests_counter.increment(labels: {result: 'failure'})
   end
 
   channel.ack(delivery_info.delivery_tag)
