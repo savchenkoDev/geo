@@ -2,6 +2,7 @@ channel = RabbitMQ.consumer_channel
 queue = channel.queue('geocoding', durable: true)
 
 queue.subscribe(manual_ack: true) do |delivery_info, properties, payload|
+  start_time = Time.current
   payload = JSON(payload)
   Thread.current[:request_id] = properties.headers['request_id']
 
@@ -25,4 +26,7 @@ queue.subscribe(manual_ack: true) do |delivery_info, properties, payload|
   end
 
   channel.ack(delivery_info.delivery_tag)
+
+  total_time = Time.current - start_time
+  Metrics.geocoding_rate.observe(total_time)
 end

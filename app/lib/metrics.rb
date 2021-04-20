@@ -7,7 +7,6 @@ module Metrics
 
     registry.metrics.each do |m|
       define_method(m.name) { m }
-
     end
   end
 end
