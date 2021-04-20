@@ -72,9 +72,14 @@ GEM
       concurrent-ruby (~> 1.0)
     minitest (5.14.4)
     multipart-post (2.1.1)
+    nio4r (2.5.7)
     oj (3.11.3)
     ougai (2.0.0)
       oj (~> 3.10)
+    prometheus-client (2.1.0)
+    puma (5.2.2)
+      nio4r (~> 2.0)
+    rack (2.2.3)
     rake (13.0.3)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
@@ -114,6 +119,9 @@ DEPENDENCIES
   geocoder
   i18n
   ougai
+  prometheus-client
+  puma
+  rack
   rake
   rspec (~> 3.9.0)
 

@@ -5,6 +5,8 @@ source "https://rubygems.org"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem 'rake'
+gem 'rack'
+gem 'puma'
 
 gem 'i18n'
 gem 'config'
@@ -13,6 +15,7 @@ gem 'bunny'
 
 gem 'dry-validation'
 gem 'dry-initializer'
+gem 'prometheus-client'
 
 gem 'geocoder'
 
