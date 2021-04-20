@@ -1,0 +1,66 @@
+---
+- hosts: app
+  gather_facts: no
+  vars:
+    image: geo
+  tasks:
+    - name: setup facts
+      set_fact:
+        timestamp: '{{ lookup("pipe", "date -u +%Y%m%d%H%M%S") }}'
+    - name: build docker image
+      delegate_to: 127.0.0.1
+      docker_image:
+        build:
+          path: ../
+          pull: no
+        name: '{{ image }}'
+        source: build
+        force_source: yes
+    - name: save image to file
+      delegate_to: 127.0.0.1
+      docker_image:
+        name: '{{ image }}'
+        tag: latest
+        archive_path: '{{ image }}.tar'
+        source: local
+    - name: compress image
+      delegate_to: 127.0.0.1
+      archive:
+        path: '{{ image }}.tar'
+        dest: '{{ image }}.tar.gz'
+        remove: yes
+    - name: upload image
+      copy:
+        src: '{{ image }}.tar.gz'
+        dest: '/tmp/{{ timestamp }}-{{ image }}.tar.gz'
+    - name: remove archive file
+      delegate_to: 127.0.0.1
+      file:
+        path: '{{ image }}.tar.gz'
+        state: absent
+    - name: extract image
+      shell: 'gunzip {{ timestamp }}-{{ image }}.tar.gz'
+      args:
+        chdir: /tmp
+    - name: load image
+      become: yes
+      docker_image:
+        name: geo
+        load_path: '/tmp/{{ timestamp }}-{{ image }}.tar'
+        source: load
+        force_source: yes
+    - name: remove image file
+      file:
+        path: '/tmp/{{ timestamp }}-{{ image }}.tar'
+        state: absent
+    - name: start geocoder container
+      become: yes
+      docker_container:
+        name: geo
+        image: '{{ image }}'
+        network_mode: host
+        restart_policy: on-failure
+        restart_retries: 10
+        env_file: '/home/{{ ansible_user }}/.env'
+        tty: yes
+        state: started

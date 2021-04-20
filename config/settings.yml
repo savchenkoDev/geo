@@ -1,6 +1,9 @@
 app:
   name: geo
 rabbit_mq:
+  host: <%= ENV['RABBITMQ_HOST'] %>
+  username: <%= ENV['RABBITMQ_USER'] %>
+  password: <%= ENV['RABBITMQ_PASSWORD'] %> 
   consumer_pool: 10
 ads_service:
   url: http://localhost:9290/ads

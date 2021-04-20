@@ -1,5 +1,4 @@
 require 'geocoder'
-require 'byebug'
 
 class Application
   class << self
